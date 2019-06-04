@@ -33,6 +33,7 @@ def index(request):
 
 class BookListView(generic.ListView):
     model = Book
+    paginate_by = 5
 
 
 class BookDetailView(generic.DetailView):
