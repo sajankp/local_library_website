@@ -19,6 +19,10 @@ def index(request):
 
     num_genres_active = sum([1 for x in Genre.objects.all() if x.book_set.count()>0])
 
+    # Number of visits to this view, as counted in the session variable.
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits + 1
+
     context = {
         'num_books': num_books,
         'num_instances': num_instances,
@@ -26,6 +30,7 @@ def index(request):
         'num_authors': num_authors,
         'num_genres': num_genres,
         'num_genres_active': num_genres_active,
+        'num_visits': num_visits,
     }
 
     # Render the HTML template index.html with the data in the context variable
